@@ -6,7 +6,7 @@
   <title>Evonne Nguyen</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=Playfair+Display:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -15,18 +15,19 @@
     }
 
     :root {
-      --bg: #fdfcfb;
+      --bg: #fdf8f3;
       --text: #1a1a1a;
       --muted: #6b6b6b;
       --accent: #c4a882;
       --accent-dark: #a8895f;
-      --card-bg: #fafaf8;
+      --card-bg: #ffffff;
       --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
       --radius: 14px;
     }
 
     body {
-      background: var(--bg);
+      background: linear-gradient(135deg, #fdf8f3 0%, #faeee4 100%);
+      background-attachment: fixed;
       color: var(--text);
       font-family: 'Inter', sans-serif;
       font-size: 16px;
@@ -46,21 +47,12 @@
     }
 
     .hero h1 {
-      font-family: 'Inter', sans-serif;
-      font-size: 34px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: #2d2d2d;
-      margin-bottom: 10px;
-    }
-
-    .hero-location {
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      color: var(--muted);
+      font-family: 'Fraunces', serif;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #1a1a1a;
       margin-bottom: 24px;
-      text-transform: uppercase;
     }
 
     .hero-rule {
@@ -212,7 +204,7 @@
       }
 
       .hero h1 {
-        font-size: 26px;
+        font-size: 38px;
       }
 
       .projects {
@@ -228,9 +220,7 @@
 
     <section class="hero">
       <h1>Evonne Nguyen</h1>
-      <p class="hero-location">Melbourne, AU</p>
-      <hr class="hero-rule" />
-      <p>Been experimenting with AI over the last few months, seeing how it could help with problems I run into every day. Here's a few things I've built.</p>
+      <p>Been experimenting with AI over the last few months, seeing how it could help with problems I run into every day. Here's a few things I've built!</p>
     </section>
 
     <div class="divider"></div>
