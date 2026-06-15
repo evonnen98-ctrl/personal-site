@@ -35,23 +35,22 @@
     }
 
     .container {
-      max-width: 860px;
+      max-width: 1020px;
       margin: 0 auto;
       padding: 0 60px;
     }
 
     /* Hero */
     .hero {
-      padding: 100px 0 72px;
+      padding: 80px 0 60px;
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(38px, 5vw, 56px);
+      font-family: 'Inter', sans-serif;
+      font-size: 34px;
       font-weight: 600;
-      line-height: 1.12;
       letter-spacing: -0.01em;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       color: var(--text);
     }
 
@@ -59,7 +58,7 @@
       font-size: 17px;
       line-height: 1.75;
       color: var(--muted);
-      max-width: 600px;
+      max-width: 640px;
     }
 
     /* Divider */
@@ -71,13 +70,12 @@
       border-radius: 2px;
     }
 
-    /* Projects grid */
+    /* Projects grid — no align-items so all rows stretch to equal height */
     .projects {
       padding-bottom: 100px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      align-items: start;
     }
 
     /* Card */
@@ -86,15 +84,45 @@
       border: 1px solid rgba(0, 0, 0, 0.06);
       border-radius: var(--radius);
       box-shadow: var(--card-shadow);
-      padding: 28px;
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
 
     .card:hover {
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.11);
       transform: translateY(-3px);
+    }
+
+    .card--disabled {
+      cursor: default;
+    }
+
+    .card--disabled:hover {
+      box-shadow: var(--card-shadow);
+      transform: none;
+    }
+
+    /* Screenshot image — edge-to-edge at top, fixed height */
+    .card-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+
+    /* Content area below the image */
+    .card-content {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .card-title {
@@ -112,76 +140,24 @@
       flex: 1;
     }
 
-    /* Screenshot placeholder — browser/app style, always 16:9 */
-    .screenshot {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      margin: 20px 0 20px;
-      overflow: hidden;
-      position: relative;
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-
-    /* Faux browser chrome bar */
-    .screenshot::before {
-      content: '● ● ●';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 26px;
-      background: #e2ddd8;
-      z-index: 2;
-      font-size: 7px;
-      letter-spacing: 3px;
-      color: #b5aba0;
-      display: flex;
-      align-items: center;
-      padding-left: 10px;
-      line-height: 26px;
-    }
-
-    .screenshot::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      top: 26px;
-      background: linear-gradient(135deg, #ede9e3 0%, #d8d0c7 100%);
-      z-index: 1;
-    }
-
-    .screenshot-label {
-      position: absolute;
-      z-index: 3;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, calc(-50% + 13px));
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #a89a8a;
-    }
-
-    /* Demo button */
+    /* Button always anchors to bottom */
     .demo-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       background: var(--accent);
       color: #fff;
-      text-decoration: none;
       font-size: 13px;
       font-weight: 500;
       padding: 9px 18px;
       border-radius: 8px;
-      transition: background 0.2s ease;
       letter-spacing: 0.01em;
       align-self: flex-start;
+      margin-top: 20px;
+      transition: background 0.2s ease;
     }
 
-    .demo-btn:hover {
+    .card:hover .demo-btn {
       background: var(--accent-dark);
     }
 
@@ -191,7 +167,11 @@
       opacity: 0.85;
     }
 
-    /* Responsive: collapse to single column on smaller screens */
+    .demo-btn--disabled {
+      opacity: 0.4;
+    }
+
+    /* Responsive */
     @media (max-width: 760px) {
       .container {
         padding: 0 28px;
@@ -201,14 +181,14 @@
         padding: 64px 0 48px;
       }
 
+      .hero h1 {
+        font-size: 26px;
+      }
+
       .projects {
         grid-template-columns: 1fr;
         padding-bottom: 64px;
         gap: 20px;
-      }
-
-      .card {
-        padding: 24px;
       }
     }
   </style>
@@ -217,7 +197,7 @@
   <div class="container">
 
     <section class="hero">
-      <h1>Building with AI,<br>one problem at a time.</h1>
+      <h1>Evonne Nguyen</h1>
       <p>Been experimenting with AI over the last few months, seeing how it could help with problems I run into every day. Here's a few things I've built.</p>
     </section>
 
@@ -226,48 +206,48 @@
     <section class="projects">
 
       <!-- Project 1: My Drobe -->
-      <div class="card">
-        <div class="card-title">My Drobe</div>
-        <p class="card-desc">I'm a bit of a shopaholic. So I built something that talks me out of impulse buys and helps me figure out whether something actually fits what I already own.</p>
-        <div class="screenshot">
-          <span class="screenshot-label">Preview</span>
+      <a class="card" href="https://seam-1q3l.vercel.app/home" target="_blank" rel="noopener">
+        <img class="card-img" src="mydrobe.png" alt="My Drobe" />
+        <div class="card-content">
+          <div class="card-title">My Drobe</div>
+          <p class="card-desc">I'm a bit of a shopaholic. So I built something that talks me out of impulse buys and checks whether it actually fits what I already own.</p>
+          <span class="demo-btn">
+            Live demo
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </span>
         </div>
-        <a href="#" class="demo-btn">
-          Live demo
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 8h10M9 4l4 4-4 4"/>
-          </svg>
-        </a>
-      </div>
+      </a>
 
       <!-- Project 2: Melbourne Finder -->
-      <div class="card">
-        <div class="card-title">Melbourne Finder</div>
-        <p class="card-desc">I was spending way too much time on Google Maps and Broadsheet to find somewhere to go with friends. So I built something that filters it all down to the best options.</p>
-        <div class="screenshot">
-          <span class="screenshot-label">Preview</span>
+      <a class="card" href="https://melbourne-picks-03.vercel.app/" target="_blank" rel="noopener">
+        <img class="card-img" src="melbourne.png" alt="Melbourne Finder" />
+        <div class="card-content">
+          <div class="card-title">My Next Spot</div>
+          <p class="card-desc">I was spending too long on Google Maps and Broadsheet just to find somewhere good to go. So I built something that filters it down to the best options.</p>
+          <span class="demo-btn">
+            Live demo
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </span>
         </div>
-        <a href="#" class="demo-btn">
-          Live demo
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 8h10M9 4l4 4-4 4"/>
-          </svg>
-        </a>
-      </div>
+      </a>
 
       <!-- Project 3: Endurance Coach -->
-      <div class="card">
-        <div class="card-title">Endurance Coach</div>
-        <p class="card-desc">Training for a half Ironman, I needed someone to help me build a plan — something that knows my training history, keeps me accountable, and adjusts based on how I'm going.</p>
-        <div class="screenshot">
-          <span class="screenshot-label">Preview</span>
+      <div class="card card--disabled">
+        <img class="card-img" src="coach.png" alt="Endurance Coach" />
+        <div class="card-content">
+          <div class="card-title">My Coach</div>
+          <p class="card-desc">Training for a half Ironman, I needed a plan that actually knew me. So I built an AI coach that tracks my training history and adjusts based on how I'm going.</p>
+          <span class="demo-btn demo-btn--disabled">
+            Coming soon
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </span>
         </div>
-        <a href="#" class="demo-btn">
-          Live demo
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 8h10M9 4l4 4-4 4"/>
-          </svg>
-        </a>
       </div>
 
     </section>
