@@ -6,8 +6,7 @@
   <title>Evonne Nguyen</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,700..900;1,9..144,700..900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -16,263 +15,724 @@
     }
 
     :root {
-      --text: #1a1a1a;
-      --muted: #555555;
-      --card-bg: #ffffff;
-      --radius: 14px;
-      --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+      --page-bg:              #ffffff;
+      --surface-bg:           #f5f5f3;
+      --headline-color:       #1a1a1a;
+      --intro-color:          #555555;
+      --shape-color:          #1a1a1a;
+      --link-color:           #6B7280;
+      --link-hover:           #111111;
+      --link-underline:       rgba(107, 114, 128, 0.4);
+      --link-underline-hover: #111111;
+      --sep-color:            #9CA3AF;
+      --toast-color:          #1a1a1a;
+      --footer-bg:            #fafafa;
+      --footer-border:        rgba(0, 0, 0, 0.08);
+      --footer-text:          #b0b0b0;
+      --toggle-color:         #6B7280;
+      --work-heading:         #1a1a1a;
+      --work-title:           #1a1a1a;
+      --work-desc:            #4a4a4a;
+      --work-divider:         #e0e0e0;
+      --card-bg:              #ffffff;
+    }
+
+    html.dark {
+      --page-bg:              #161616;
+      --surface-bg:           #161616;
+      --headline-color:       #f5f5f5;
+      --intro-color:          #a0a0a0;
+      --shape-color:          #ffffff;
+      --link-color:           #6B7280;
+      --link-hover:           #e5e7eb;
+      --link-underline:       rgba(107, 114, 128, 0.35);
+      --link-underline-hover: #e5e7eb;
+      --sep-color:            #4B5563;
+      --toast-color:          #e5e7eb;
+      --footer-bg:            #161616;
+      --footer-border:        #2a2a2a;
+      --footer-text:          #555555;
+      --toggle-color:         #6B7280;
+      --work-heading:         #f5f5f5;
+      --work-title:           #f5f5f5;
+      --work-desc:            #a0a0a0;
+      --work-divider:         #2a2a2a;
+      --card-bg:              #161616;
     }
 
     body {
-      background: linear-gradient(135deg, #f3f0ea 0%, #ebe7df 100%) fixed;
-      color: var(--text);
+      background: var(--page-bg);
+      color: var(--headline-color);
       font-family: 'Archivo', sans-serif;
       font-size: 16px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    .container {
-      max-width: 1020px;
-      margin: 0 auto;
-      padding: 0 60px;
+    /* ── Dark mode toggle ────────────────────────── */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--toggle-color);
+      opacity: 0.75;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 0.2s ease, color 0.2s ease;
     }
 
-    /* Hero */
+    .theme-toggle:hover { opacity: 1; }
+
+    .icon-sun { display: none; }
+    html.dark .icon-moon { display: none; }
+    html.dark .icon-sun  { display: flex; }
+
+    /* ══════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════ */
+
     .hero {
-      padding: 100px 0 80px;
-      text-align: left;
-    }
-
-    .hero h1 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 64px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
-
-    .hero p {
-      font-size: 17px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 700px;
-    }
-
-    /* Projects grid */
-    .projects {
-      margin-top: 22px;
-      padding-bottom: 120px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    /* Card */
-    .card {
-      background: var(--card-bg);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: var(--radius);
-      box-shadow: var(--card-shadow);
-      overflow: hidden;
+      min-height: 100vh;
+      position: relative;
       display: flex;
       flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 90px;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          ellipse 80% 60% at 50% 100%,
+          rgba(232, 99, 58, 0.30) 0%,
+          rgba(232, 99, 58, 0.12) 35%,
+          transparent 65%
+        ),
+        #f5f5f3;
+      transition: background 0.3s ease;
     }
 
-    .card:hover {
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.11);
-      transform: translateY(-3px);
+    html.dark .hero {
+      background:
+        radial-gradient(
+          ellipse 80% 60% at 50% 100%,
+          rgba(255, 255, 255, 0.06) 0%,
+          transparent 65%
+        ),
+        #161616;
     }
 
-    .card--disabled {
-      cursor: default;
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 760px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
     }
 
-    .card--disabled:hover {
-      box-shadow: var(--card-shadow);
-      transform: none;
+    .hero-headline {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(48px, 9vw, 110px);
+      font-weight: 800;
+      font-style: normal;
+      line-height: 1.05;
+      color: var(--headline-color);
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease;
+      animation: heroFadeUp 500ms ease-out 0ms both;
     }
 
-    /* Screenshot wrapper */
-    .card-img-wrap {
-      background: #fff;
-      padding: 12px 12px 0;
+    .hero-headline em { font-style: italic; }
+
+    .hero-intro {
+      font-family: 'Archivo', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--intro-color);
+      max-width: 600px;
+      margin-top: 28px;
+      transition: color 0.2s ease;
+      animation: heroFadeUp 500ms ease-out 200ms both;
+    }
+
+    .contact-links {
+      position: relative;
+      margin-top: 22px;
+      text-align: center;
+      white-space: nowrap;
+      font-size: 13px;
+      color: var(--link-color);
+      letter-spacing: 0.01em;
+      animation: heroFadeUp 500ms ease-out 300ms both;
+    }
+
+    .contact-link {
+      color: var(--link-color);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: var(--link-underline);
+      transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    }
+
+    .contact-link:hover {
+      color: var(--link-hover);
+      text-decoration-color: var(--link-underline-hover);
+    }
+
+    .contact-sep { margin: 0 8px; color: var(--sep-color); }
+
+    .copied-toast {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -1.8em;
+      font-size: 12px;
+      color: var(--toast-color);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .copied-toast.show { opacity: 1; }
+
+    .scroll-prompt {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      font-family: 'Archivo', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #9a9a9a;
+      z-index: 1;
+      animation: heroFadeUp 500ms ease-out 600ms both;
+    }
+
+    /* ── Hero decorative shapes ──────────────────── */
+    .deco {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      margin-left: -7px;
+      margin-top: -7px;
+      pointer-events: none;
+      user-select: none;
+      color: var(--shape-color);
+      display: block;
+      z-index: 0;
+      transition: color 0.2s ease;
+    }
+
+    .deco-star {
+      left: 22%; top: 25%;
+      width: 16px; height: 16px;
+      margin-left: -8px; margin-top: -8px;
+      animation:
+        heroShapeFadeIn 300ms ease-out 600ms both,
+        spinShape 28s linear 900ms infinite;
+    }
+
+    .deco-cross {
+      left: 78%; top: 25%;
+      animation:
+        heroShapeFadeIn 300ms ease-out 600ms both,
+        spinShape 33s linear 900ms infinite;
+    }
+
+    .deco-dots-bl {
+      left: 22%; top: 70%;
+      animation:
+        heroShapeFadeIn 300ms ease-out 600ms both,
+        spinShape 25s linear 900ms infinite;
+    }
+
+    .deco-dots-br {
+      left: 78%; top: 70%;
+      animation:
+        heroShapeFadeIn 300ms ease-out 600ms both,
+        spinShape 30s linear 900ms infinite;
+    }
+
+    /* ══════════════════════════════════════════════
+       WORK SECTION
+    ══════════════════════════════════════════════ */
+
+    .work-section {
+      background: var(--surface-bg);
+      border-top: 1px solid var(--work-divider);
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .work-inner {
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+      padding-left: max(24px, calc((100vw - 1400px) / 2 + 24px));
+    }
+
+    .work-left {
+      width: min(35vw, 490px);
+      flex-shrink: 0;
+      position: sticky;
+      top: 100px;
+      align-self: flex-start;
+      padding-top: 80px;
+      /* gap on .work-inner provides the column gutter — no padding-right needed */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Work section decorative shapes ─────────── */
+    /*
+      .work-heading-group shrinks to the heading's rendered text width
+      (display: inline-block), so flex-centering the shape within each
+      wrapper aligns shapes on the heading's own visual midpoint rather
+      than the wider column content box.
+    */
+    .work-heading-group {
+      display: inline-block;
+      text-align: center;
+    }
+
+    .work-deco-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .work-deco-wrap.work-deco-above { margin-bottom: 36px; }
+    .work-deco-wrap.work-deco-below { margin-top: 36px; }
+
+    .work-deco {
+      display: block;
+      width: 14px;
+      height: 14px;
+      color: var(--shape-color);
+      pointer-events: none;
+      user-select: none;
+      flex-shrink: 0;
+      transition: color 0.2s ease;
+    }
+
+    .work-deco-above .work-deco {
+      animation:
+        heroShapeFadeIn 300ms ease-out 600ms both,
+        spinShape 22s linear 900ms infinite;
+    }
+
+    .work-deco-below .work-deco {
+      width: 10px;
+      height: 10px;
+      animation:
+        heroShapeFadeIn 300ms ease-out 600ms both,
+        spinShape 36s linear 900ms infinite;
+    }
+
+    .work-heading {
+      font-family: 'Fraunces', serif;
+      font-style: normal;
+      font-weight: 800;
+      font-size: clamp(36px, 6vw, 64px);
+      color: var(--work-heading);
+      line-height: 1.1;
+      transition: color 0.2s ease;
+    }
+
+    .work-subheading {
+      margin-top: 24px;
+      font-family: 'Archivo', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #9a9a9a;
+      line-height: 1.6;
+    }
+
+    /* Right column — bleeds to browser edge, no gap between cards */
+    .work-right {
+      flex: 1;
+      min-width: 0;
+      border-left: 1px solid var(--work-divider);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: border-color 0.2s ease;
+    }
+
+    /* ── Project cards ───────────────────────────── */
+    .work-row {
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--work-divider);
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* Single divider between stacked cards */
+    .work-row + .work-row { border-top: none; }
+
+    /* Full-width divider line already set on .work-section — don't double it */
+    .work-row:first-child { border-top: none; }
+
+    /* Text content */
+    .work-content {
+      display: flex;
+      flex-direction: column;
+      padding: 40px 40px 16px;
+    }
+
+    .work-row-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .work-num {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: #9a9a9a;
       flex-shrink: 0;
     }
 
-    /* Screenshot image */
-    .card-img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-      border-radius: 8px;
+    .work-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 32px;
+      color: var(--work-title);
+      line-height: 1.1;
+      transition: color 0.2s ease;
     }
 
-    /* Content area */
-    .card-content {
-      padding: 24px 28px 28px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .card-title {
-      font-size: 19px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-
-    .card-desc {
-      font-size: 14px;
+    .work-desc {
+      font-family: 'Archivo', sans-serif;
+      font-size: 15px;
       font-weight: 400;
       line-height: 1.7;
-      color: var(--muted);
-      flex: 1;
+      color: var(--work-desc);
+      max-width: 480px;
+      transition: color 0.2s ease;
     }
 
-    /* Demo button */
-    .demo-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: transparent;
-      color: var(--text);
-      border: 1.5px solid var(--text);
-      font-family: 'Archivo', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 8px 16px;
-      border-radius: 8px;
-      letter-spacing: 0.01em;
+    /* Button lives below the screenshot — direct child of .work-row */
+    .work-link {
+      display: inline-block;
       align-self: flex-start;
-      margin-top: 20px;
-      transition: background 0.2s ease, color 0.2s ease;
+      width: max-content;
+      margin: 24px 40px 40px;
+      background: transparent;
+      border: 1px solid var(--work-divider);
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--work-title);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
-    .card:hover .demo-btn {
-      background: var(--text);
-      color: #fff;
+    .work-link:hover {
+      background: linear-gradient(135deg, rgba(232, 99, 58, 0.06) 0%, rgba(232, 99, 58, 0.22) 100%);
+      color: var(--headline-color);
+      border-color: rgba(232, 99, 58, 0.3);
     }
 
-    .demo-btn svg {
-      width: 13px;
-      height: 13px;
-      opacity: 0.85;
+    html.dark .work-link:hover {
+      background: #222222;
+      color: var(--headline-color);
+      border-color: #3a3a3a;
     }
 
-    .demo-btn--disabled {
-      opacity: 0.4;
+    /*
+      Frame padding is always visible; clip-path on the img itself
+      means only the photo wipes in — the white border shows immediately.
+    */
+    .work-img-area {
+      width: 100%;
+      padding: 0 24px 24px;
     }
 
-    /* Footer */
+    .work-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 300ms ease-out;
+    }
+
+    .work-row:hover .work-img {
+      clip-path: inset(0 0% 0 0);
+      transition: clip-path 480ms ease-out;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
     .site-footer {
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 28px 0 36px;
+      background: var(--footer-bg);
+      border-top: 1px solid var(--footer-border);
+      padding: 16px 0;
       text-align: center;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
 
     .site-footer p {
       font-size: 12px;
-      color: #b0b0b0;
+      color: var(--footer-text);
       letter-spacing: 0.03em;
+      transition: color 0.2s ease;
     }
 
-    /* Responsive */
-    @media (max-width: 760px) {
-      .container {
-        padding: 0 28px;
+    /* ══════════════════════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════════════════════ */
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroShapeFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes spinShape {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-headline,
+      .hero-intro,
+      .contact-links,
+      .scroll-prompt  { animation: none; opacity: 1; transform: none; }
+      .deco                        { animation: none !important; opacity: 1; }
+      .work-deco-wrap .work-deco   { animation: none !important; opacity: 1; }
+      .work-img                    { transition: none; }
+    }
+
+    /* ══════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════ */
+
+    @media (max-width: 1023px) {
+      .work-inner {
+        flex-direction: column;
+        padding: 0 24px;
+        gap: 0;
       }
 
-      .hero {
-        padding: 72px 0 56px;
+      .work-left {
+        width: 100%;
+        position: static;
+        padding-top: 48px;
       }
 
-      .hero h1 {
-        font-size: 40px;
+      .work-right {
+        border-left: none;
+        width: 100%;
+        margin-top: 32px;
       }
 
-      .projects {
-        grid-template-columns: 1fr;
-        padding-bottom: 80px;
-        gap: 24px;
+      .work-row {
+        border: 1px solid var(--work-divider);
+        border-radius: 0;
       }
+
+      .work-row:first-child { border-top: none; border-radius: 8px 8px 0 0; }
+      .work-row:last-child  { border-radius: 0 0 8px 8px; }
+    }
+
+    @media (max-width: 680px) {
+      .hero { padding: 80px 20px 70px; }
+
+      .deco-star    { left: 12%; top: 18%; }
+      .deco-cross   { left: 88%; top: 18%; }
+      .deco-dots-bl { left: 12%; top: 78%; }
+      .deco-dots-br { left: 88%; top: 78%; }
+
+      .work-inner   { padding: 0 16px; }
+      .work-left    { padding-top: 36px; }
+      .work-content { padding: 24px; }
+      .work-title   { font-size: 24px; }
+
+      .theme-toggle { top: 16px; right: 16px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <section class="hero">
-      <h1>Evonne Nguyen</h1>
-      <p>Been experimenting with AI over the last few months, seeing how it could help with problems I run into every day. Here's a few things I've built!</p>
-    </section>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
 
-    <section class="projects">
+  <!-- ═══ HERO ═══════════════════════════════════ -->
+  <section class="hero">
 
-      <!-- Project 1: My Drobe -->
-      <a class="card" href="https://seam-1q3l.vercel.app/home" target="_blank" rel="noopener">
-        <div class="card-img-wrap">
-          <img class="card-img" src="mydrobe.03.png" alt="My Drobe" />
-        </div>
-        <div class="card-content">
-          <div class="card-title">My Drobe</div>
-          <p class="card-desc">I'm a bit of a shopaholic. So I built something that talks me out of impulse buys and checks whether it actually fits what I already own.</p>
-          <span class="demo-btn">
-            Try it
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
+    <svg class="deco deco-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 2 L13.6 10.4 L22 12 L13.6 13.6 L12 22 L10.4 13.6 L2 12 L10.4 10.4 Z" fill="currentColor"/>
+    </svg>
+
+    <svg class="deco deco-cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+
+    <svg class="deco deco-dots-bl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <circle cx="10" cy="2"  r="2.2" fill="currentColor"/>
+      <circle cx="18" cy="10" r="2.2" fill="currentColor"/>
+      <circle cx="10" cy="18" r="2.2" fill="currentColor"/>
+      <circle cx="2"  cy="10" r="2.2" fill="currentColor"/>
+    </svg>
+
+    <svg class="deco deco-dots-br" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <circle cx="3"  cy="3"  r="2.2" fill="currentColor"/>
+      <circle cx="10" cy="10" r="2.2" fill="currentColor"/>
+      <circle cx="17" cy="17" r="2.2" fill="currentColor"/>
+    </svg>
+
+    <div class="hero-content">
+      <h1 class="hero-headline">hi, I'm <em>E</em>vonne</h1>
+
+      <p class="hero-intro">Been experimenting with AI over the last few months, seeing how it could help with problems I run into every day. Here's a few things I've built!</p>
+
+      <p class="contact-links">
+        <a class="contact-link" href="#" id="email-link">Email</a>
+        <span class="contact-sep">·</span>
+        <a class="contact-link" href="https://www.linkedin.com/in/evonne-nguyen-19958b150/" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="copied-toast" id="copied-toast">Copied!</span>
+      </p>
+    </div>
+
+    <p class="scroll-prompt">(SCROLL DOWN &amp; EXPLORE)</p>
+  </section>
+
+  <!-- ═══ WORK ══════════════════════════════════ -->
+  <section class="work-section">
+    <div class="work-inner">
+
+      <div class="work-left">
+        <!-- inline-block group shrinks to heading text width for true centering -->
+        <div class="work-heading-group">
+          <div class="work-deco-wrap work-deco-above">
+            <svg class="work-deco" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 2 L13.6 10.4 L22 12 L13.6 13.6 L12 22 L10.4 13.6 L2 12 L10.4 10.4 Z" fill="currentColor"/>
             </svg>
-          </span>
-        </div>
-      </a>
+          </div>
 
-      <!-- Project 2: Melbourne Finder -->
-      <a class="card" href="https://melbourne-picks-03.vercel.app/" target="_blank" rel="noopener">
-        <div class="card-img-wrap">
-          <img class="card-img" src="melbourne.png" alt="Melbourne Finder" />
-        </div>
-        <div class="card-content">
-          <div class="card-title">My Next Spot</div>
-          <p class="card-desc">I was spending too long on Google Maps and Broadsheet just to find somewhere good to go. So I built something that filters it down to the best options.</p>
-          <span class="demo-btn">
-            Try it
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
+          <h2 class="work-heading">selected<br>projects</h2>
+
+          <div class="work-deco-wrap work-deco-below">
+            <svg class="work-deco" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
-          </span>
-        </div>
-      </a>
+          </div>
 
-      <!-- Project 3: Endurance Coach -->
-      <a class="card" href="https://endurance-coach-production.up.railway.app" target="_blank" rel="noopener">
-        <div class="card-img-wrap">
-          <img class="card-img" src="coach.png" alt="Endurance Coach" />
+          <p class="work-subheading">(hover over the apps to view)</p>
         </div>
-        <div class="card-content">
-          <div class="card-title">My Coach</div>
-          <p class="card-desc">Training for a half Ironman, I needed a plan that actually knew me. So I built an AI coach that tracks my training history and adjusts based on how I'm going.</p>
-          <span class="demo-btn">
-            Try it
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </span>
-        </div>
-      </a>
+      </div>
 
-    </section>
-  </div>
+      <div class="work-right">
+
+        <!-- 01 — My Drobe -->
+        <div class="work-row">
+          <div class="work-content">
+            <div class="work-row-header">
+              <span class="work-num">(01)</span>
+              <span class="work-title">My Drobe</span>
+            </div>
+            <p class="work-desc">I'm a bit of a shopaholic. So I built something that talks me out of impulse buys and checks whether it actually fits what I already own.</p>
+          </div>
+          <div class="work-img-area">
+            <img class="work-img" src="t%20(1).png" alt="My Drobe app screenshot" />
+          </div>
+          <a class="work-link" href="https://seam-1q3l.vercel.app/home" target="_blank" rel="noopener">View app →</a>
+        </div>
+
+        <!-- 02 — My Next Spot -->
+        <div class="work-row">
+          <div class="work-content">
+            <div class="work-row-header">
+              <span class="work-num">(02)</span>
+              <span class="work-title">My Next Spot</span>
+            </div>
+            <p class="work-desc">I was spending too long on Google Maps and Broadsheet just to find somewhere good to go. So I built something that filters it down to the best options.</p>
+          </div>
+          <div class="work-img-area">
+            <img class="work-img" src="t%20(2).png" alt="My Next Spot app screenshot" />
+          </div>
+          <a class="work-link" href="https://melbourne-picks-03.vercel.app/" target="_blank" rel="noopener">View app →</a>
+        </div>
+
+        <!-- 03 — My Coach -->
+        <div class="work-row">
+          <div class="work-content">
+            <div class="work-row-header">
+              <span class="work-num">(03)</span>
+              <span class="work-title">My Coach</span>
+            </div>
+            <p class="work-desc">Training for a half Ironman, I needed a plan that actually knew me. So I built an AI coach that tracks my training history and adjusts based on how I'm going.</p>
+          </div>
+          <div class="work-img-area">
+            <img class="work-img" src="t%20(3).png" alt="My Coach app screenshot" />
+          </div>
+          <a class="work-link" href="https://endurance-coach-production.up.railway.app" target="_blank" rel="noopener">View app →</a>
+        </div>
+
+      </div><!-- /.work-right -->
+    </div><!-- /.work-inner -->
+  </section>
 
   <footer class="site-footer">
     <p>Last updated Jun 2026</p>
   </footer>
+
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    document.getElementById('email-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      navigator.clipboard.writeText('evonne.n98@gmail.com').then(function() {
+        var toast = document.getElementById('copied-toast');
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 1500);
+      });
+    });
+  </script>
 </body>
 </html>
