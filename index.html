@@ -464,7 +464,9 @@
 
     .work-img {
       width: 100%;
-      height: auto;
+      aspect-ratio: 5.2 / 1;
+      object-fit: cover;
+      object-position: top;
       display: block;
       clip-path: inset(0 100% 0 0);
       transition: clip-path 300ms ease-out;
@@ -473,6 +475,12 @@
     .work-row:hover .work-img {
       clip-path: inset(0 0% 0 0);
       transition: clip-path 480ms ease-out;
+    }
+
+    .work-row:last-child .work-img {
+      aspect-ratio: auto;
+      object-fit: unset;
+      height: auto;
     }
 
     /* ── Footer ──────────────────────────────────── */
@@ -697,7 +705,7 @@
             <p class="work-desc">Training for a half Ironman, I needed a plan that actually knew me. So I built an AI coach that tracks my training history and adjusts based on how I'm going.</p>
           </div>
           <div class="work-img-area">
-            <img class="work-img" src="t%20(6).png" alt="My Coach app screenshot" />
+            <img class="work-img" src="t%20(10).png" alt="My Coach app screenshot" />
           </div>
           <a class="work-link" href="https://endurance-coach-production.up.railway.app" target="_blank" rel="noopener">View app →</a>
         </div>
